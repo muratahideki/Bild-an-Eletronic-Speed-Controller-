@@ -15,7 +15,7 @@ This project aims to outline an ESC (Electronic Speed Controller) using KiCad, s
 Responsible for the commutation logic, BEMF (Back Electromotive Force) reading, and PWM generation.<br>
 First, we will start with PWM. On ESP32, we can use a module called MCPWM (MOTOR CONROL PULSE WIDTH MODULATION).This module focuses on controlling three-phases motor like BLDCs, and offers high frequency occuracy.
 
-according to Espressif's official documatation: 
+*according to Espressif's official documatation:* 
 
 > "ESP32-S3 integrates two MCPWMs that can be used to drive digital motors and smart light. Each MCPWM
 peripheral has one clock divider (prescaler), three PWM timers, three PWM operators, and a capture module.
@@ -28,7 +28,7 @@ alone. Different PWM timers can also be synchronized together."
 
 [1]: [https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/mcpwm.html](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
 
-*Pin Assignment*<br>
+**Pin Assignment**<br>
 For MCPWM, the pins used can be chosen from any GPIOs via the GPIO Matrix.
 
 
