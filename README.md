@@ -28,6 +28,10 @@ alone. Different PWM timers can also be synchronized together."
 
 [1]: [https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/mcpwm.html](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
 
+*Pin Assignment*<br>
+For MCPWM, the pins used can be chosen from any GPIOs via the GPIO Matrix.
+
+
 
 
 
