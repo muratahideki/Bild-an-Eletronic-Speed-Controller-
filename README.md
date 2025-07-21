@@ -11,4 +11,5 @@ This project aims to outline an ESC (Electronic Speed Controller) using KiCad, s
 - 1 Diodo Bootstrap
 
 ## 2 theoretical fundamentals
-
+### 2.1 ESP32-S3
+Responsible for the commutation logic, BEMF (Back Electromotive Force) reading, and PWM generation
