@@ -24,6 +24,10 @@ on the timing references. Any PWM operator can be configured to use the timing r
 timers. Different PWM operators can use the same PWM timer’s timing references to produce related PWM
 signals. PWM operators can also use different PWM timers’ values to produce the PWM signals that work
 alone. Different PWM timers can also be synchronized together."
+> — *Espressif Documentation, ESP32-S3 MCPWM*
+
+[1]: [https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/mcpwm.html](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
+
 
 
 
