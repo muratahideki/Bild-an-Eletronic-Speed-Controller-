@@ -27,7 +27,7 @@ signals. PWM operators can also use different PWM timers’ values to produce th
 alone. Different PWM timers can also be synchronized together."
 > — *Espressif Documentation, ESP32-S3 MCPWM*
 
-[1]: [https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/mcpwm.html](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
+[reference](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/mcpwm.html](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
 
 **Pin Assignment**<br>
 For MCPWM, the pins used can be chosen from any GPIOs via the GPIO Matrix.<br>
@@ -48,18 +48,33 @@ Some gate drivers also support dead-time insertion, which helps prevent both the
 |------------|
 | Dead-Time  |
 
+[reference](https://www.alldatasheet.com/datasheet-pdf/view/1238238/INFINEON/IRS2003S.html)
+
 ### 2.3 Mosfets 
 
-| Model         | V<sub>DS</sub> | I<sub>D</sub> | R<sub>DS(on)</sub> | V<sub>GS(th)</sub>  | comment                                                    |
-| ------------- | -------------- | ------------- | ------------------ | ------------------ | ----------------------------------------------------------- |
-| **IRF3205**   | 55 V           | 110 A         | \~8 mΩ             | 2–4 V              | mainstream. Requires a good cooler                          |
+| Model         | V<sub>DSS</sub> | I<sub>D</sub> | R<sub>DS(on)</sub> | V<sub>GS(th)</sub>  | comment                                                    |
+| ------------- | --------------  | ------------- | ------------------ | ------------------ | ----------------------------------------------------------- |
+| **IRF3205**   | 55 V            | 110 A         | \~8 mΩ             | 2–4 V              | mainstream. Requires a good cooler                          |
 
+[Datasheet](https://www.alldatasheet.com/datasheet-pdf/view/68131/IRF/IRF3205.html)
 
 For this project, The IRF3205 was chosen owing to its affordability and compatibility with the required gate drive Voltage (Vgs). Furthermore, 6 MOSFETs are needed to bild a three-phase half-bridge: three will operate in high side and three on the low side. 
 
+## 3 METHODS
 
+### 3.1 Bootstrap circuit 
 
+When the Low Side Input is high, the Driver gate send through the low side output's pin a high signal to the gate of low side mosfet. So The path of the current pass the VCC source, it goes to the Diodo Bootstrap, and after charge the capacitor Bootstrap. Finally, the current pass from the drain to source's transistor low side. And that source is connect with the ground, so also the motor's tension stay on ground 
 
+<p align="center">
+<img width="509" height="326" alt="image" src="https://github.com/user-attachments/assets/2e1902e8-834b-4009-ad38-e9e5699913b8" />
+</p>
+
+In the other hand, when the input of the High Side Input in high in the drive gate, the High output's pin open the transistor's gate of high side mosfet with the help of the capacitor bootstrap. Therefore, the source cennect with the transistor's drain will pass to the source, and it will providing this high tension to the motor 
+
+<p align="center">
+<img width="555" height="267" alt="image" src="https://github.com/user-attachments/assets/bd22d915-a22c-4d1d-9f75-3b7442481012" />
+</p>
 
 
 
