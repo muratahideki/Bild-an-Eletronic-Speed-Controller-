@@ -83,12 +83,6 @@ On the other hand, when the High Side Input of the gate driver is high, the High
 For generation of PWM signal, use main function:
 
 ```C++
-
-#include "driver/mcpwm.h"
-#include "driver/gpio.h"
-
-#define PWM_GPIO 18  // Pino onde o sinal PWM será gerado
-
 void app_main(void)
 {
     // Associa o GPIO ao canal MCPWM
@@ -108,10 +102,28 @@ void app_main(void)
 }
 ```
 
+Each module in ESP32 has 2 "operadores (timer + comparador). And each comparador control the output of two PWM's signal (A and B)
+
+| Function                         | What it does                                          |
+| -------------------------------- | ----------------------------------------------------- |
+| `mcpwm_init()`                   | Inicia o sinal PWM com uma configuração definida      |
+| `mcpwm_gpio_init()`              | Liga um GPIO ao canal MCPWM A ou B                    |
+| `mcpwm_set_duty()`               | Altera o duty cycle (em %) durante execução           |
+| `mcpwm_start()` / `mcpwm_stop()` | Liga ou desliga o sinal (opcional)                    |
 
 
+⚙️ 1. Duty Cycle
+👉 O que é?
+É a proporção de tempo que o sinal PWM fica ligado (nível alto) durante um ciclo completo.
 
+🧠 Fórmula:
+undefined
+🔦 Exemplo:
+Frequência: 1kHz (1 ciclo dura 1ms)
 
+Duty cycle: 50% → sinal fica 0,5 ms ligado e 0,5 ms desligado
+
+Duty cycle: 75% → sinal fica 0,75 ms ligado e 0,25 ms desligado
 
 
 
