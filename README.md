@@ -64,13 +64,13 @@ For this project, The IRF3205 was chosen owing to its affordability and compatib
 
 ### 3.1 Bootstrap circuit 
 
-When the Low Side Input is high, the Driver gate send through the low side output's pin a high signal to the gate of low side mosfet. So The path of the current pass the VCC source, it goes to the Diodo Bootstrap, and after charge the capacitor Bootstrap. Finally, the current pass from the drain to source's transistor low side. And that source is connect with the ground, so also the motor's tension stay on ground 
+When the Low Side Input is high, the gate driver sends a high signal through the Low Side Output pin to the gate of the low-side MOSFET. As a result, the current path starts from the VCC source, flows through the bootstrap diode, and charges the bootstrap capacitor. Then, the current flows from the drain to the source of the low-side transistor. Since the source is connected to ground, the motor's voltage also drops to ground.
 
 <p align="center">
 <img width="509" height="326" alt="image" src="https://github.com/user-attachments/assets/2e1902e8-834b-4009-ad38-e9e5699913b8" />
 </p>
 
-In the other hand, when the input of the High Side Input in high in the drive gate, the High output's pin open the transistor's gate of high side mosfet with the help of the capacitor bootstrap. Therefore, the source cennect with the transistor's drain will pass to the source, and it will providing this high tension to the motor 
+On the other hand, when the High Side Input of the gate driver is high, the High Side Output pin activates the gate of the high-side MOSFET with the help of the bootstrap capacitor. As a result, current flows from the drain to the source of the high-side transistor, delivering a high voltage to the motor.
 
 <p align="center">
 <img width="555" height="267" alt="image" src="https://github.com/user-attachments/assets/bd22d915-a22c-4d1d-9f75-3b7442481012" />
