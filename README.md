@@ -76,6 +76,40 @@ On the other hand, when the High Side Input of the gate driver is high, the High
 <img width="555" height="267" alt="image" src="https://github.com/user-attachments/assets/bd22d915-a22c-4d1d-9f75-3b7442481012" />
 </p>
 
+### 3.2 calculus
+
+### 3.x Code's logic 
+
+For generation of PWM signal, use main function:
+
+```C++
+
+#include "driver/mcpwm.h"
+#include "driver/gpio.h"
+
+#define PWM_GPIO 18  // Pino onde o sinal PWM será gerado
+
+void app_main(void)
+{
+    // Associa o GPIO ao canal MCPWM
+    mcpwm_gpio_init(MCPWM_UNIT_0, MCPWM0A, PWM_GPIO);
+
+    // Estrutura de configuração do PWM
+    mcpwm_config_t pwm_config = {
+        .frequency = 1000,        // Frequência do PWM (1 kHz)
+        .cmpr_a = 50.0,           // Duty cycle do canal A (50%)
+        .cmpr_b = 0.0,            // Canal B não será usado
+        .counter_mode = MCPWM_UP_COUNTER,
+        .duty_mode = MCPWM_DUTY_MODE_0, // PWM ativo em nível alto
+    };
+
+    // Inicializa o MCPWM com as configurações acima
+    mcpwm_init(MCPWM_UNIT_0, MCPWM_TIMER_0, &pwm_config);
+}
+```
+
+
+
 
 
 
