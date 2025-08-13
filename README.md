@@ -110,8 +110,6 @@ void app_main(void)
 }
 ```
 
-Each module in ESP32 has 2 "operadores (timer + comparador). And each comparador control the output of two PWM's signal (A and B)
-
 | Function                         | What it does                                          |
 | -------------------------------- | ----------------------------------------------------- |
 | `mcpwm_init()`                   | Inicia o sinal PWM com uma configuração definida      |
@@ -127,8 +125,35 @@ Frequência: 1kHz (1 ciclo dura 1ms)
  - Duty cycle: 50% → sinal fica 0,5 ms ligado e 0,5 ms desligado
  - Duty cycle: 75% → sinal fica 0,75 ms ligado e 0,25 ms desligado
 
+Each module in ESP32 has 3 timers. And each timer can control the output of two PWM's signal (A and B). So inside the `void app_main`, we call `mcpwm_gpio_init` 6 times, using the parameters releted to the unit we are working with, in this case, MCPWM_UNIT_0, the timer is are use, and its speciffic channel. Finnaly, we  put the pin that are connected in ESP32.
 
+- Timer 0 → Channel A = High phase 1, Channel B = Low phase 1
 
+- Timer 1 → Channel A = High phase 2, Channel B = Low phase 2
+
+- Timer 2 → Channel A = High phase 3, Channel B = Low phase 3
+
+``` C
+    // Mapeia GPIOs para MCPWM Unit 0, Timer 0, canais A e B
+    mcpwm_gpio_init(MCPWM_UNIT_0, MCPWM0A, f_PWM_GPIO_HIGH);
+    mcpwm_gpio_init(MCPWM_UNIT_0, MCPWM0B, f_PWM_GPIO_LOW);
+
+    mcpwm_gpio_init(MCPWM_UNIT_0, MCPWM1A, s_PWM_GPIO_HIGH);
+    mcpwm_gpio_init(MCPWM_UNIT_0, MCPWM1B, s_PWM_GPIO_LOW);
+
+    mcpwm_gpio_init(MCPWM_UNIT_0, MCPWM2A, t_PWM_GPIO_HIGH);
+    mcpwm_gpio_init(MCPWM_UNIT_0, MCPWM2B, t_PWM_GPIO_LOW);
+```
+
+After setting the `mcpwm_config_t cfg` structure, as described earlier, and map where the pins to their specific modele and timer, we have to initialize this setting with the `mcpwm_init` function:
+
+``` C
+    mcpwm_init(MCPWM_UNIT_0, MCPWM_TIMER_0, &cfg);
+    mcpwm_init(MCPWM_UNIT_0, MCPWM_TIMER_1, &cfg);
+    mcpwm_init(MCPWM_UNIT_0, MCPWM_TIMER_2, &cfg);
+```
+
+- We use `&` before `cfg` because we are passing the memory address of the variable `cfg`. In other words, we are sending a pointer to the function, not a copy of the variable. The advantage is that this is faster, and it is already the expected way to pass structures in this case.
 
 
 
