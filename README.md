@@ -78,6 +78,14 @@ On the other hand, when the High Side Input of the gate driver is high, the High
 
 ### 3.2 calculus
 
+### 3.3 Skecht
+
+In this project, we used KiCad software to design the circuit and better understand its logic and the types of electronic components involved.
+
+<p align="center">
+<img width="962" height="686" alt="image" src="https://github.com/user-attachments/assets/bafde194-ea83-4acc-aea8-acb5abbe2144" />
+</p>
+
 ### 3.x Code's logic 
 
 For generation of PWM signal, use main function:
@@ -112,18 +120,12 @@ Each module in ESP32 has 2 "operadores (timer + comparador). And each comparador
 | `mcpwm_start()` / `mcpwm_stop()` | Liga ou desliga o sinal (opcional)                    |
 
 
-⚙️ 1. Duty Cycle
-👉 O que é?
-É a proporção de tempo que o sinal PWM fica ligado (nível alto) durante um ciclo completo.
+Duty cycle is the proportion of time that a PWM signal stays high during one complete cycle.
 
-🧠 Fórmula:
-undefined
-🔦 Exemplo:
+Example:
 Frequência: 1kHz (1 ciclo dura 1ms)
-
-Duty cycle: 50% → sinal fica 0,5 ms ligado e 0,5 ms desligado
-
-Duty cycle: 75% → sinal fica 0,75 ms ligado e 0,25 ms desligado
+ - Duty cycle: 50% → sinal fica 0,5 ms ligado e 0,5 ms desligado
+ - Duty cycle: 75% → sinal fica 0,75 ms ligado e 0,25 ms desligado
 
 
 
