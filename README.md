@@ -206,7 +206,16 @@ The line `const mcpwm_action_t commutation_steps[6][6]` declares an matrix `cons
     - MCPWM_GEN_OFF: force a high impedance state for output (float)
 - `commutation step` is the matrix's name
 
+Each {} represents a state: {A+ A- B+ B- C+ C-}. So we have 6 states in diffets mements.
 
+|    A+    |    A-   |   B+    |    B-  |   C+   |   C-  |
+| -------- | ------- | --------| -------| ------ | ----- |
+|    HI    |   LO    |     F   |    HI  |   F    |  LO   | 
+|    HI    |   LO    |     F   |    LO  |   F    |  HI   |
+|    F     |   LO    |    HI   |    LO  |  HI    |   
+|    LO    |   HI    |     F   |
+|    LO    |   F     |    HI   |
+|    F     |   LO    |    HI   |
 
 
 
