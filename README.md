@@ -212,10 +212,11 @@ Each {} represents a state: {A+ A- B+ B- C+ C-}. So we have 6 states in diffets 
 | -------- | ------- | --------| -------| ------ | ----- |
 |    HI    |   LO    |     F   |    HI  |   F    |  LO   | 
 |    HI    |   LO    |     F   |    LO  |   F    |  HI   |
-|    F     |   LO    |    HI   |    LO  |  HI    |   
-|    LO    |   HI    |     F   |
-|    LO    |   F     |    HI   |
-|    F     |   LO    |    HI   |
+|    F     |   LO    |    HI   |    LO  |   HI   |   F   | 
+|    F     |   HI    |    HI   |    LO  |   LO   |   HI  |
+|    LO    |   HI    |    LO   |    HI  |   HI   |   F   | 
+|    LO    |   F     |    LO   |    HI  |   HI   |   LO  | 
+
 
 
 
