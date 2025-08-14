@@ -155,6 +155,33 @@ After setting the `mcpwm_config_t cfg` structure, as described earlier, and map 
 
 - We use `&` before `cfg` because we are passing the memory address of the variable `cfg`. In other words, we are sending a pointer to the function, not a copy of the variable. The advantage is that this is faster, and it is already the expected way to pass structures in this case.
 
+Next, we have to sincronize the signal in a way that if one are high, other have to be low
 
+``` C
+    // HIN e LIN são complementares (mesmo duty, fases opostas).
+    mcpwm_set_duty_type(MCPWM_UNIT_0, MCPWM_TIMER_0, MCPWM_OPR_B, MCPWM_DUTY_MODE_1);
+    mcpwm_set_duty_type(MCPWM_UNIT_0, MCPWM_TIMER_1, MCPWM_OPR_B, MCPWM_DUTY_MODE_1);
+    mcpwm_set_duty_type(MCPWM_UNIT_0, MCPWM_TIMER_2, MCPWM_OPR_B, MCPWM_DUTY_MODE_1);
+```
+
+The `MCPWM` model has to operator in each timer
+- `MCPWM_OPR_A` → control the output A (for example, MCPWM0A, MCPWM1A, etc.)
+- `MCPWM_OPR_B` → control the output B (for example, MCPWM0B, MCPWM1B, etc.)
+
+The `MCPWM_DUTY_MODE` defines which logic level represents the “active” part of the duty cycle.
+- `MCPWM_DUTY_MODE_0` → Duty activates in high level (default)
+- `MCPWM_DUTY_MODE_1` → Duty activates in low level<br>
+So what our code are saying is that we are controlling the output B, and defining the time of duty the output will be low, and in the rest time will be high  
+
+Now, for securance, we can add Dead-Time 
+
+``` C
+    mcpwm_deadtime_enable(MCPWM_UNIT_0, MCPWM_TIMER_0, MCPWM_ACTIVE_HIGH_COMPLIMENT_MODE, 100, 100);
+    mcpwm_deadtime_enable(MCPWM_UNIT_0, MCPWM_TIMER_1, MCPWM_ACTIVE_HIGH_COMPLIMENT_MODE, 100, 100);
+    mcpwm_deadtime_enable(MCPWM_UNIT_0, MCPWM_TIMER_2, MCPWM_ACTIVE_HIGH_COMPLIMENT_MODE, 100, 100);
+```
+
+- In `mcpwm_deadtime_enable` the parameter `MCPWM_ACTIVE_HIGH_COMPLIMENT_MODE` means that the logic level are on when the signal are high (ACTIVE_HIGH). The COMPLIMENT means that if one are high other have to be low.
+- for both last parameters, 100 ns means the time of delay to start do increase and decrease the signal: rising edge delay & falling edge delay.
 
 
