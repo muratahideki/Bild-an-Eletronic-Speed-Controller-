@@ -184,4 +184,19 @@ Now, for securance, we can add Dead-Time
 - In `mcpwm_deadtime_enable` the parameter `MCPWM_ACTIVE_HIGH_COMPLIMENT_MODE` means that the logic level are on when the signal are high (ACTIVE_HIGH). The COMPLIMENT means that if one are high other have to be low.
 - for both last parameters, 100 ns means the time of delay to start do increase and decrease the signal: rising edge delay & falling edge delay.
 
+### Comutation Code 
+
+In the preveous topic, we have a great undertanding the logic of initialization, but now we have give a step on making the trapeizoidal comutation. 
+
+| phase A  | phase B | phase C |
+| -------- | ------- | --------|
+|    HI    |   LO    |     F   |
+|    HI    |   F     |    LO   |
+|    F     |   HI    |    LO   |
+|    LO    |   HI    |     F   |
+|    LO    |   F     |    HI   |
+|    F     |   LO    |    HI   |
+
+- Where Hi is High, LO is low, and F is float ( without energy)
+
 
