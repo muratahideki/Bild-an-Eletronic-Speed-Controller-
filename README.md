@@ -199,4 +199,14 @@ In the preveous topic, we have a great undertanding the logic of initialization,
 
 - Where Hi is High, LO is low, and F is float ( without energy)
 
+The line `const mcpwm_action_t commutation_steps[6][6]` declares an matrix `constant`, i.e the values can not change when the program are executig, for store the commutation's steps of BLDC motor<br>
+- `mcpwm_action_t` it's a matrix, and a type of enumeration `enum` defined in the framework ESP-IDF. It's used for represantation an output's state of periferic MCPWM, the possible values are:
+    - MCPWM_GEN_FORCED_HIGH: force a HIGH state for output
+    - MCPWM_GEN_FORCED_LOW: force a LOW state for output
+    - MCPWM_GEN_OFF: force a high impedance state for output (float)
+- `commutation step` is the matrix's name
+
+
+
+
 
