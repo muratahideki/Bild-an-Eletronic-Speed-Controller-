@@ -218,5 +218,32 @@ Each {} represents a state: {A+ A- B+ B- C+ C-}. So we have 6 states in diffets 
 |    LO    |   F     |    LO   |    HI  |   HI   |   LO  | 
 
 
+Para entender o que está acontecendo vamos por steps na função `set_commutation_step(int step, float duty_cycle)`:
+`step 0`: 
+pegamos a primeira linha de `const mcpwm_action_t commutation_steps[6][6]`, isto é:<br>
+{MCPWM_GEN_FORCED_HIGH, MCPWM_GEN_FORCED_LOW, MCPWM_GEN_OFF, MCPWM_GEN_FORCED_HIGH, MCPWM_GEN_OFF, MCPWM_GEN_FORCED_LOW}
+
+assim a função `set_commutation_step` fica no step 0:<br>
+
+```
+void set_commutation_step(int step, float duty_cycle) {
+    // Aplica o ciclo de trabalho e o estado de comutação para a fase A
+    mcpwm_set_duty(MCPWM_UNIT_0, MCPWM_TIMER_0, MCPWM_OPR_A, duty_cycle);
+    mcpwm_set_action(MCPWM_UNIT_0, MCPWM_TIMER_0, MCPWM_GEN_FORCED_HIGH, MCPWM_GEN_FORCED_HIGH);
+    mcpwm_set_action(MCPWM_UNIT_0, MCPWM_TIMER_0, MCPWM_GEN_FORCED_LOW, MCPWM_GEN_FORCED_LOW);
+
+    // Aplica o ciclo de trabalho e o estado de comutação para a fase B
+    mcpwm_set_duty(MCPWM_UNIT_0, MCPWM_TIMER_1, MCPWM_OPR_A, duty_cycle);
+    mcpwm_set_action(MCPWM_UNIT_0, MCPWM_TIMER_1, MCPWM_GEN_FORCED_HIGH, MCPWM_GEN_OFF);
+    mcpwm_set_action(MCPWM_UNIT_0, MCPWM_TIMER_1, MCPWM_GEN_FORCED_LOW, MCPWM_GEN_FORCED_HIGH);
+
+    // Aplica o ciclo de trabalho e o estado de comutação para a fase C
+    mcpwm_set_duty(MCPWM_UNIT_0, MCPWM_TIMER_2, MCPWM_OPR_A, duty_cycle);
+    mcpwm_set_action(MCPWM_UNIT_0, MCPWM_TIMER_2, MCPWM_GEN_FORCED_HIGH, MCPWM_GEN_OFF);
+    mcpwm_set_action(MCPWM_UNIT_0, MCPWM_TIMER_2, MCPWM_GEN_FORCED_LOW, MCPWM_GEN_FORCED_LOW);
+
+```
+
+
 
 
