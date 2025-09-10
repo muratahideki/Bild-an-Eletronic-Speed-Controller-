@@ -188,14 +188,15 @@ Now, for securance, we can add Dead-Time
 
 In the preveous topic, we have a great undertanding the logic of initialization, but now we have give a step on making the trapeizoidal comutation. 
 
-| phase A  | phase B | phase C |
-| -------- | ------- | --------|
-|    HI    |   LO    |     F   |
-|    HI    |   F     |    LO   |
-|    F     |   HI    |    LO   |
-|    LO    |   HI    |     F   |
-|    LO    |   F     |    HI   |
-|    F     |   LO    |    HI   |
+| Etapa | Fase A | Fase B | Fase C | Observação                     |
+| ----- | ------ | ------ | ------ | ------------------------------ |
+| 1     | +      | –      | 0      | Corrente entra em A, sai por B |
+| 2     | +      | 0      | –      | Corrente entra em A, sai por C |
+| 3     | 0      | +      | –      | Corrente entra em B, sai por C |
+| 4     | –      | +      | 0      | Corrente entra em B, sai por A |
+| 5     | –      | 0      | +      | Corrente entra em C, sai por A |
+| 6     | 0      | –      | +      | Corrente entra em C, sai por B |
+
 
 - Where Hi is High, LO is low, and F is float ( without energy)
 
