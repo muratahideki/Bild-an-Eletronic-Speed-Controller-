@@ -73,7 +73,7 @@ void set_commutation_step(int step, float duty_cycle) {
 }
 
 void app_main(void) {
-    // Mapeia GPIOs para MCPWM
+    // Mapeia GPIOs para MCPWM (unidade, timer e geradores A ou B, numero da porta)
     mcpwm_gpio_init(MCPWM_UNIT_0, MCPWM0A, PHASE_A_H_GPIO);
     mcpwm_gpio_init(MCPWM_UNIT_0, MCPWM0B, PHASE_A_L_GPIO);
     mcpwm_gpio_init(MCPWM_UNIT_0, MCPWM1A, PHASE_B_H_GPIO);
@@ -108,6 +108,6 @@ void app_main(void) {
 
         step = (step + 1) % 6; // Avança para o próximo passo
 
-        vTaskDelay(pdMS_TO_TICKS(50)); // ~20 Hz → só para teste (motor vai dar trancos)
+        // vTaskDelay(pdMS_TO_TICKS(50)); // ~20 Hz → só para teste (motor vai dar trancos)
     }
 }
