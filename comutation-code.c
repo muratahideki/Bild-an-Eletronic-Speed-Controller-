@@ -100,13 +100,20 @@ void app_main(void) {
     mcpwm_deadtime_enable(MCPWM_UNIT_0, MCPWM_TIMER_2, MCPWM_ACTIVE_HIGH_COMPLIMENT_MODE, 100, 100);
 
     // Loop principal de comutação
-    float duty_cycle = 50.0; // Ciclo de trabalho em %
+    float duty_cycle = 30.0; // Ciclo de trabalho em %
     int step = 0;
 
     while (1) {
         set_commutation_step(step, duty_cycle);
 
         step = (step + 1) % 6; // Avança para o próximo passo
+
+        ets_delay_us(delay_us);  // delay em microssegundos (mais preciso que vTaskDelay)
+
+    // Ramp-up: diminui o delay a cada ciclo, mas com limite mínimo
+        if (delay_us > 1000) {  // 1000 us = 1 kHz elétrico
+            delay_us -= 10;     // acelera suavemente
+                }
 
         // vTaskDelay(pdMS_TO_TICKS(50)); // ~20 Hz → só para teste (motor vai dar trancos)
     }
