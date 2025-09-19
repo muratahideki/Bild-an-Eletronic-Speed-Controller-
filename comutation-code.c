@@ -102,19 +102,19 @@ void app_main(void) {
     // Loop principal de comutação
     float duty_cycle = 30.0; // Ciclo de trabalho em %
     int step = 0;
+    int delay_us = 2000;
 
     while (1) {
         set_commutation_step(step, duty_cycle);
 
         step = (step + 1) % 6; // Avança para o próximo passo
 
-        ets_delay_us(delay_us);  // delay em microssegundos (mais preciso que vTaskDelay)
+        ets_delay_us(delay_us);  // é mais preciso em curtos períodos (µs a poucos ms).Mas se usado em loops longos, desperdiça CPU.
 
     // Ramp-up: diminui o delay a cada ciclo, mas com limite mínimo
         if (delay_us > 1000) {  // 1000 us = 1 kHz elétrico
             delay_us -= 10;     // acelera suavemente
                 }
 
-        // vTaskDelay(pdMS_TO_TICKS(50)); // ~20 Hz → só para teste (motor vai dar trancos)
     }
 }
