@@ -16,7 +16,8 @@
 #define ADC_WIDTH   ADC_WIDTH_BIT_12
 #define ADC_ATTEN   ADC_ATTEN_DB_11  // até ~3.6V
 
-int steps_adc[6] { ADC1, ADC2, ADC3, ADC4, ADC5, ADC6 };
+int steps_adc[6] { 1,2,3,4,5,6 }; // verificar se é int msm essa função
+
 int vbus = 12
 int vbus_half = vbus / 2
 
@@ -24,20 +25,41 @@ std::array<int,6> read_ADC() {
   return {adc1_get_raw(ADC1),adc1_get_raw(ADC2),adc2_get_raw(ADC3),adc2_get_raw(ADC4),adc2_get_raw(ADC5),adc2_get_raw(ADC6)
     };
     
-void comparator(){
+void comparator(int vbus_half, int steps_adc){
   while(true) {
-    auto adc = read_ADC()
-    if (adc[0] < 100 && adc[1] < 100) {
-          // return step = 4 ou 1
-            };
+    auto adc_latest = read_ADC();
+    // return step = 4 ou 1
+    if (adc[0,1] < 100) {
+      auto adc[0,1] = read_ADC()
+      //cruzando para cima 
+      if ( adc_latest[0,1] < vbus_half && adc[0,1] >= vbus_half){
+        return steps_adc[1] };
+      //cruzando para baixo 
+      elif ( adc_latest[0,1] >= vbus_half && adc[0,1] < vbus_half){
+        return steps_adc[4]};     
+        };
+        adc_latest[0,1] = adc[0,1];
   
-    if (adc[2] < 100 && adc[3] < 100) {
-          // return step = 3 ou 6
-            };
-  
-    if (adc[4] < 100 && adc[5] < 100) {
-          // return step = 2 ou 5
-            };
+    if (adc[2,3] < 100) {
+      auto adc[2,3] = read_ADC()
+        if ( adc_latest[2,3] < vbus_half && adc[2,3] >= vbus_half){
+          return steps_adc[3] };
+        //cruzando para baixo 
+        elif ( adc_latest[2,3] >= vbus_half && adc[2,3] < vbus_half){
+          return steps_adc[6]};
+        };
+        adc_latest[2,3] = adc[2,3];
+
+    if (adc[4,5] < 100) {
+      auto adc[4,5] = read_ADC()
+        if ( adc_latest[4,5] < vbus_half && adc[4,5] >= vbus_half){
+          return steps_adc[5] };
+        //cruzando para baixo 
+        elif ( adc_latest[4,5] >= vbus_half && adc[4,5] < vbus_half){
+          return steps_adc[2]};
+        };
+        adc_latest[4,5] = adc[4,5];
+  };
 
 // --- Polling para detectar Zero Crossing ---
 int wait_for_ZC(int vbus_half){
