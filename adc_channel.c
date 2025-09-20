@@ -3,6 +3,8 @@
 #include "esp_timer.h"
 #include "esp_log.h"
 
+// sugestão: usar só ADC1
+
 
 // --- Configuração ADC ---
 #define ADC1 ADC1_CHANNEL_3   // GPIO4 (exemplo, fase flutuante)
@@ -18,8 +20,8 @@
 
 int steps_adc[6] { 1,2,3,4,5,6 }; // verificar se é int msm essa função
 
-int vbus = 12
-int vbus_half = vbus / 2
+int vbus = 12;
+int vbus_half = vbus / 2;
 
 std::array<int,6> read_ADC() {
   return {adc1_get_raw(ADC1),adc1_get_raw(ADC2),adc2_get_raw(ADC3),adc2_get_raw(ADC4),adc2_get_raw(ADC5),adc2_get_raw(ADC6)
